@@ -1,0 +1,23 @@
+<div class="cart-item">
+  <div class="item-info">
+    <span class="item-name">{{ item.productName }}</span>
+    <span class="item-meta">€{{ item.unitPrice.toFixed(2) }} / {{ item.unit }}</span>
+  </div>
+
+  <div class="item-controls">
+    <button mat-icon-button class="qty-btn" (click)="onDecrement()" [disabled]="item.quantity <= 1">
+      <mat-icon>remove</mat-icon>
+    </button>
+    <span class="quantity">{{ item.quantity }}</span>
+    <button mat-icon-button class="qty-btn" (click)="onIncrement()">
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
+
+  <div class="item-right">
+    <span class="item-total">€{{ item.lineTotal.toFixed(2) }}</span>
+    <button mat-icon-button class="remove-btn" (click)="onRemove()">
+      <mat-icon>delete_outline</mat-icon>
+    </button>
+  </div>
+</div>

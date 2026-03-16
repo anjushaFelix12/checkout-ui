@@ -1,0 +1,71 @@
+<div class="cart-container">
+
+  <!-- Header -->
+  <div class="cart-header">
+    <div class="cart-header-left">
+      <mat-icon>shopping_cart</mat-icon>
+      <h3>Your Cart</h3>
+    </div>
+    <button mat-icon-button (click)="onClose()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+  <mat-divider></mat-divider>
+
+  <ng-container *ngIf="cart$ | async as cart">
+
+    <!-- Empty state -->
+    <div class="empty-cart" *ngIf="cart.items.length === 0">
+      <mat-icon class="empty-icon">shopping_cart</mat-icon>
+      <p>Your cart is empty</p>
+      <span>Add products to get started</span>
+    </div>
+
+    <!-- Items list -->
+    <div class="cart-items" *ngIf="cart.items.length > 0">
+      <app-cart-item
+        *ngFor="let item of cart.items"
+        [item]="item"
+        (increment)="onIncrement($event)"
+        (decrement)="onDecrement($event)"
+        (remove)="onRemove($event)">
+      </app-cart-item>
+    </div>
+
+    <!-- Footer -->
+    <div class="cart-footer" *ngIf="cart.items.length > 0">
+      <mat-divider></mat-divider>
+
+      <div class="cart-meta">
+        <span class="meta-label">{{ cart.totalItems }} item{{ cart.totalItems !== 1 ? 's' : '' }}</span>
+        <span class="meta-label">{{ cart.itemCount }} product{{ cart.itemCount !== 1 ? 's' : '' }}</span>
+      </div>
+
+      <div class="subtotal-row">
+        <span class="subtotal-label">Subtotal</span>
+        <span class="subtotal-value">€{{ cart.subtotal.toFixed(2) }}</span>
+      </div>
+
+      <div class="offer-hint">
+        <mat-icon class="hint-icon">local_offer</mat-icon>
+        Offers applied automatically at checkout
+      </div>
+
+      <div class="cart-actions">  
+        <button
+          mat-raised-button
+          color="primary"
+          class="checkout-btn"
+          [disabled]="cart.items.length === 0"
+          (click)="onCheckout()">
+          <mat-icon>receipt_long</mat-icon>
+          Checkout
+        </button>
+      </div>
+
+    </div>
+
+  </ng-container>
+
+</div>
