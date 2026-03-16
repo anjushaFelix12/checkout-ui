@@ -16,7 +16,7 @@ This application provides a user interface for interacting with the backend REST
 - Checkout price calculation with bundle offers applied
 
 
-# How to run
+## How to run
 
 ```bash
 # 1. Install dependencies
@@ -29,12 +29,6 @@ ng serve
 ## Angular will run at:
 
 http://localhost:4200
-
-## How to Run
-
-
-
-Open **http://localhost:4200** in your browser.
 
 ---
 
@@ -69,3 +63,8 @@ ng build --configuration production
   }
 }
 ```
+## Documentation
+
+Project documentation is available in the `docs/` directory:
+
+- [Architecture](docs/architecture.md) — Backend architecture and module structure
