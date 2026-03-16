@@ -25,7 +25,10 @@ import { ProductListComponent }     from './features/product-list/product-list.c
 import { ProductCardComponent }     from './features/product-list/product-card/product-card.component';
 import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
-import { OffersPageComponent } from './features/offers-page/offers-page.component';
+import { OffersPageComponent } from './features/offers/offers-page.component';
+import { CartComponent } from './features/cart/cart.component';
+import { CartItemComponent } from './features/cart/cart-item/cart-item.component';
+import { CheckoutPageComponent } from './features/checkout/checkout-page.component';
 
 const MATERIAL = [
   MatToolbarModule,
@@ -48,6 +51,9 @@ const MATERIAL = [
     ProductListComponent,
     ProductCardComponent,
     OffersPageComponent,
+    CartComponent,
+    CartItemComponent,
+    CheckoutPageComponent
   ],
   imports: [
     BrowserModule,

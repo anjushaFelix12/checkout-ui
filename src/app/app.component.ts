@@ -31,7 +31,7 @@ export class AppComponent implements OnInit {
       error: () => this.cartService.createCart().subscribe()
     });
 
-    // Load offer count for nav badge
+    // Load offer count 
     this.offerService.getActiveOffers().subscribe({
       next: offers => this.offerCount = offers.length,
       error: () => this.offerCount = 0

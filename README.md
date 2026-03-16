@@ -1,59 +1,71 @@
-# CheckoutUi
+# Supermarket Checkout UI
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.2.
+Angular frontend for the Supermarket Checkout System.
+This application provides a user interface for interacting with the backend REST API.
 
-## Development server
+## Features include:
 
-To start a local development server, run:
+- Product catalog browsing
+
+- Viewing weekly offers
+
+- Creating and managing a shopping cart
+
+- Adding, updating, and removing items from the cart
+
+- Checkout price calculation with bundle offers applied
+
+
+# How to run
 
 ```bash
+# 1. Install dependencies
+npm install
+
+# 2. Start the dev server
 ng serve
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## Angular will run at:
 
-## Code scaffolding
+http://localhost:4200
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## How to Run
 
-```bash
-ng generate component component-name
-```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
 
-```bash
-ng generate --help
-```
+Open **http://localhost:4200** in your browser.
 
-## Building
+---
 
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+## How to Run Tests
 
 ```bash
 ng test
 ```
 
-## Running end-to-end tests
+---
 
-For end-to-end (e2e) testing, run:
+## How to Build for Production
 
 ```bash
-ng e2e
+ng build --configuration production
+# Output → dist/checkout-ui/
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+---
 
-## Additional Resources
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## Proxy Configuration
+
+`proxy.conf.json` forwards all `/api` requests to the backend in development:
+
+```json
+{
+  "/api": {
+    "target": "http://localhost:8080",
+    "secure": false,
+    "changeOrigin": true
+  }
+}
+```

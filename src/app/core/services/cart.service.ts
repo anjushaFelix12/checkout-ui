@@ -15,9 +15,9 @@ export class CartService {
   cart$ = this.cartSubject.asObservable();
 
   readonly itemCount$ = new BehaviorSubject<number>(0);
-  readonly subtotal$  = new BehaviorSubject<number>(0);
+  readonly subtotal$ = new BehaviorSubject<number>(0);
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   // Called once on app init 
   init(): Observable<CartResponse> {
@@ -57,8 +57,38 @@ export class CartService {
       .pipe(tap(cart => this.updateState(cart)));
   }
 
+  updateQuantity(productCode: string, quantity: number): Observable<CartResponse> {
+    const cartId = this.getCartId();
+    return this.http
+      .patch<CartResponse>(`${this.baseUrl}/carts/${cartId}/items/${productCode}`, { quantity })
+      .pipe(tap(cart => this.updateState(cart)));
+  }
+
+  removeItem(productCode: string): Observable<CartResponse> {
+    const cartId = this.getCartId();
+    return this.http
+      .delete<void>(`${this.baseUrl}/carts/${cartId}/items/${productCode}`)
+      .pipe(
+        switchMap(() => this.getCart())  // ← fetch updated cart after delete
+      );
+  }
+
+  clearCart(): Observable<CartResponse> {
+    const cartId = this.getCartId();
+    return this.http
+      .delete<CartResponse>(`${this.baseUrl}/carts/${cartId}/items`)
+      .pipe(tap(cart => this.updateState(cart)));
+  }
+
   getCartId(): string {
     return localStorage.getItem(CART_ID_KEY) ?? '';
+  }
+
+  resetCart(): void {
+    localStorage.removeItem(CART_ID_KEY);
+    this.cartSubject.next(null);
+    this.itemCount$.next(0);
+    this.subtotal$.next(0);
   }
 
   private updateState(cart: CartResponse): void {

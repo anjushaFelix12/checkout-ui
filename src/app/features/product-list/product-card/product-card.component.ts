@@ -14,15 +14,6 @@ export class ProductCardComponent {
     this.addToCart.emit(this.product);
   }
 
-  getEmoji(code: string): string {
-    const map: Record<string, string> = {
-      APPLE: '🍎', BANANA: '🍌', MILK: '🥛', BREAD: '🍞',
-      ORANGE: '🍊', BUTTER: '🧈', CHEESE: '🧀', EGG: '🥚',
-      TOMATO: '🍅', CARROT: '🥕', POTATO: '🥔', CHICKEN: '🍗'
-    };
-    return map[code] ?? '🛒';
-  }
-
   getImage(code: string): string {
     return `assets/products/${code.toLocaleLowerCase()}.png`;
   }

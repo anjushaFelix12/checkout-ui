@@ -26,14 +26,12 @@
     <div class="error-state" *ngIf="error && !loading">
       <mat-icon class="error-icon">error_outline</mat-icon>
       <p>Could not load offers</p>
-      <span>Make sure the backend is running on port 8080</span>
     </div>
 
     <!-- Empty -->
     <div class="empty-state" *ngIf="!loading && !error && offers.length === 0">
       <mat-icon class="empty-icon">sentiment_dissatisfied</mat-icon>
       <p>No active offers this week</p>
-      <span>Check back soon — new deals arrive every Monday</span>
     </div>
 
 

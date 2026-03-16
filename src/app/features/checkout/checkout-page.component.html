@@ -1,0 +1,230 @@
+<div class="checkout-page" *ngIf="confirmed && summary; else reviewView">
+  <div class="page-container narrow">
+
+    <div class="confirmed-header">
+      <mat-icon class="confirmed-icon">check_circle</mat-icon>
+      <h1>Checkout Summary!</h1>
+      <p>Your receipt is below. Offers were applied automatically.</p>
+    </div>
+
+    <div class="receipt-card">
+
+      <div class="receipt-header">
+        <span class="receipt-logo">🛒 Supermarket</span>
+        <span class="receipt-id">Cart #{{ summary.cartId | slice:0:8 }}…</span>
+      </div>
+
+      <!-- Order Summary -->
+      <div class="receipt-section">
+        <div class="section-label">Order Summary</div>
+        <mat-divider></mat-divider>
+        <div class="line-item" *ngFor="let item of summary.items">
+          <span class="line-name">{{ item.productName }} ({{ item.quantity }})</span>
+          <span class="line-amount">€{{ item.lineSubtotal.toFixed(2) }}</span>
+        </div>
+      </div>
+
+      <!-- Discounts -->
+      <div class="receipt-section" *ngIf="summary.discounts.length > 0">
+        <mat-divider></mat-divider>
+        <div class="section-label discounts-label">
+          <mat-icon class="section-icon">local_offer</mat-icon>
+          Discounts
+        </div>
+        <mat-divider></mat-divider>
+        <div class="line-item discount-line" *ngFor="let discount of summary.discounts">
+          <span class="line-name discount-name">
+            {{ getItemName(discount.productCode) }}: {{ discount.description }}
+          </span>
+          <span class="line-amount discount-amount">−€{{ discount.amount.toFixed(2) }}</span>
+        </div>
+      </div>
+
+      <!-- Totals -->
+      <div class="receipt-totals">
+        <mat-divider></mat-divider>
+        <div class="total-row subtotal-row" *ngIf="summary.totalDiscount > 0">
+          <span>Subtotal</span>
+          <span>€{{ summary.subtotal.toFixed(2) }}</span>
+        </div>
+        <div class="total-row total-discount-row" *ngIf="summary.totalDiscount > 0">
+          <span class="total-discount-label">
+            <mat-icon class="savings-icon">savings</mat-icon>
+            Total Discount
+          </span>
+          <span class="total-discount-value">−€{{ summary.totalDiscount.toFixed(2) }}</span>
+        </div>
+        <mat-divider *ngIf="summary.totalDiscount > 0"></mat-divider>
+        <div class="total-row grand-total-row">
+          <span>Total</span>
+          <span class="grand-total-value">€{{ summary.total.toFixed(2) }}</span>
+        </div>
+      </div>
+
+      <div class="savings-banner" *ngIf="summary.totalDiscount > 0">
+        <mat-icon>celebration</mat-icon>
+        You saved <strong>€{{ summary.totalDiscount.toFixed(2) }}</strong> with weekly offers!
+      </div>
+
+    </div>
+
+    <div class="action-buttons">
+      <button mat-stroked-button color="primary" class="action-btn" (click)="onContinueShopping()">
+        <mat-icon>shopping_bag</mat-icon>
+        Continue Shopping
+      </button>
+
+      <button mat-raised-button color="primary" class="action-btn">
+        <mat-icon>payment</mat-icon>
+        Proceed to Payment
+      </button>
+    </div>
+
+  </div>
+</div>
+
+<!-- Review order -->
+<ng-template #reviewView>
+  <div class="checkout-page">
+    <div class="page-container">
+
+      <button mat-button class="back-btn" (click)="onBackToCart()">
+        <mat-icon>arrow_back</mat-icon>
+        Back to Cart
+      </button>
+
+      <h1 class="page-title">Review Your Order</h1>
+      <p class="page-sub">Check items below. Offers are applied automatically at checkout.</p>
+
+      <div class="review-layout">
+
+        <!-- ── Left: items table with inline offer info ── -->
+        <div class="review-card">
+          <h3 class="card-title">
+            <mat-icon>shopping_cart</mat-icon>
+            Order Items
+          </h3>
+          <mat-divider></mat-divider>
+
+          <!-- Table header -->
+          <div class="table-header">
+            <span>Product</span>
+            <span class="col-right">Qty</span>
+            <span class="col-right">Unit Price</span>
+            <span class="col-right">Line Total</span>
+          </div>
+          <mat-divider></mat-divider>
+
+          <!-- Each item row + inline offer row below it -->
+          <ng-container *ngFor="let item of cart?.items">
+
+            <!-- Main item row -->
+            <div class="table-row">
+              <span class="row-name">{{ item.productName }}</span>
+              <span class="col-right row-qty">{{ item.quantity }}</span>
+              <span class="col-right row-price">€{{ item.unitPrice.toFixed(2) }}</span>
+              <span class="col-right row-total">€{{ item.lineTotal.toFixed(2) }}</span>
+            </div>
+
+          </ng-container>
+
+          <mat-divider></mat-divider>
+
+          <!-- Subtotal row -->
+          <div class="table-subtotal">
+            <span>Subtotal (before offers)</span>
+            <span class="subtotal-val">€{{ cart?.subtotal?.toFixed(2) }}</span>
+          </div>
+
+          <!-- ── Discount breakdown ── -->
+          <div class="discount-breakdown" *ngIf="cart && cart.items.length > 0">
+            <mat-divider></mat-divider>
+
+            <div class="discount-breakdown-header">
+              <mat-icon class="db-icon">local_offer</mat-icon>
+              <span>Weekly Offers Available</span>
+            </div>
+
+            <div class="discount-breakdown-body">
+              <ng-container *ngFor="let item of cart.items">
+                <div class="db-row" *ngIf="item.activeOffer">
+                  <div class="db-item-info">
+                    <span class="db-product">{{ item.productName }}</span>
+                    <span class="db-offer-desc">{{ item.activeOffer.description }}</span>
+                  </div>
+                  <span class="db-badge">
+                    <mat-icon class="db-badge-icon">check_circle</mat-icon>
+                    Applies
+                  </span>
+                </div>
+              </ng-container>
+
+              <!-- If no items have offers -->
+              <div class="db-no-offers"
+                *ngIf="!cart.items || !cart.items.some(hasActiveOffer)">
+                <mat-icon>info_outline</mat-icon>
+                No weekly offers apply to your current items. It will apply after confirming checkout
+              </div>
+            </div>
+
+            <div class="discount-note">
+              Exact discount amounts are calculated when you confirm checkout.
+            </div>
+          </div>
+
+        </div>
+
+        <!-- ── Right: summary + confirm ── -->
+        <div class="summary-card">
+          <h3 class="card-title">
+            <mat-icon>receipt</mat-icon>
+            Order Summary
+          </h3>
+          <mat-divider></mat-divider>
+
+          <div class="summary-row">
+            <span>Products</span>
+            <span>{{ cart?.itemCount }}</span>
+          </div>
+          <div class="summary-row">
+            <span>Items</span>
+            <span>{{ cart?.totalItems }}</span>
+          </div>
+          <div class="summary-row">
+            <span>Subtotal</span>
+            <span>€{{ cart?.subtotal?.toFixed(2) }}</span>
+          </div>
+          <div class="summary-row offer-row">
+            <span>Offers discount</span>
+            <span class="offer-hint-text">Applied at checkout</span>
+          </div>
+
+          <mat-divider></mat-divider>
+
+          <div class="summary-row estimated-row">
+            <span>Estimated Total</span>
+            <span class="estimated-val">€{{ cart?.subtotal?.toFixed(2) }}</span>
+          </div>
+          <p class="estimated-note">* Final total shown after applying weekly offers</p>
+
+          <div class="error-msg" *ngIf="error">
+            <mat-icon>error_outline</mat-icon>
+            {{ error }}
+          </div>
+
+          <button
+            mat-raised-button color="primary"
+            class="full-btn confirm-btn"
+            [disabled]="loading"
+            (click)="onConfirmCheckout()">
+            <mat-spinner *ngIf="loading" diameter="20"></mat-spinner>
+            <mat-icon *ngIf="!loading">payment</mat-icon>
+            {{ loading ? 'Processing...' : 'Checkout' }}
+          </button>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</ng-template>

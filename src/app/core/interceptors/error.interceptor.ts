@@ -16,10 +16,8 @@ export class ErrorInterceptor implements HttpInterceptor {
     return next.handle(req).pipe(
       catchError((error: HttpErrorResponse) => {
         let message = 'Something went wrong. Please try again.';
-
         switch (error.status) {
           case 404: message = 'Resource not found.';                         break;
-          case 409: message = 'Cart is no longer open for modifications.';   break;
           case 400: message = 'Invalid request. Please check your input.';   break;
           case 0:   message = 'Cannot reach the server. Is the backend running?'; break;
         }

@@ -1,0 +1,515 @@
+.checkout-page {
+  min-height: calc(100vh - 64px);
+  background: #f5f5f5;
+  padding: 32px 16px;
+}
+
+.page-container {
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.page-container.narrow {
+  max-width: 560px;
+}
+
+/* ── Back button ─────────────────────────── */
+.back-btn {
+  margin-bottom: 20px;
+  color: #666;
+}
+
+/* ── Page title ──────────────────────────── */
+.page-title {
+  font-size: 26px;
+  font-weight: 700;
+  color: #212121;
+  margin: 0 0 6px 0;
+}
+
+.page-sub {
+  font-size: 14px;
+  color: #757575;
+  margin: 0 0 28px 0;
+}
+
+/* ── Review layout ───────────────────────── */
+.review-layout {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 24px;
+  align-items: start;
+}
+
+@media (max-width: 720px) {
+  .review-layout { grid-template-columns: 1fr; }
+}
+
+/* ── Shared card ─────────────────────────── */
+.review-card,
+.summary-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+}
+
+.card-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 15px;
+  font-weight: 700;
+  color: #212121;
+  margin: 0 0 14px 0;
+}
+
+.card-title mat-icon {
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+  color: #1565c0;
+}
+
+/* ── Items table ─────────────────────────── */
+.table-header {
+  display: grid;
+  grid-template-columns: 1fr 50px 90px 90px;
+  padding: 10px 0;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  color: #9e9e9e;
+}
+
+.table-row {
+  display: grid;
+  grid-template-columns: 1fr 50px 90px 90px;
+  padding: 12px 0;
+  border-bottom: 1px solid #f5f5f5;
+  align-items: center;
+}
+
+.col-right { text-align: right; }
+
+.row-name  { font-size: 14px; font-weight: 600; color: #212121; }
+.row-qty   { font-size: 14px; color: #424242; }
+.row-price { font-size: 13px; color: #757575; }
+.row-total { font-size: 14px; font-weight: 700; color: #212121; }
+
+.table-subtotal {
+  display: flex;
+  justify-content: space-between;
+  padding: 14px 0 4px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #212121;
+}
+
+.subtotal-val { color: #1565c0; }
+
+.offer-note {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: #2e7d32;
+  background: #f1f8e9;
+  padding: 10px 12px;
+  border-radius: 8px;
+  margin-top: 16px;
+}
+
+.offer-note-icon {
+  font-size: 16px; width: 16px; height: 16px;
+}
+
+/* ── Summary card ────────────────────────── */
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 9px 0;
+  font-size: 13px;
+  color: #424242;
+  border-bottom: 1px solid #f5f5f5;
+}
+
+.offer-row .offer-hint-text {
+  font-size: 11px;
+  color: #2e7d32;
+  font-style: italic;
+}
+
+.estimated-row {
+  padding: 12px 0 2px;
+  font-size: 15px;
+  font-weight: 700;
+  color: #212121;
+  border-bottom: none;
+}
+
+.estimated-val { color: #1565c0; font-size: 18px; }
+
+.estimated-note {
+  font-size: 11px;
+  color: #bdbdbd;
+  margin: 2px 0 18px;
+  font-style: italic;
+}
+
+.error-msg {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #c62828;
+  font-size: 13px;
+  background: #ffebee;
+  padding: 10px 12px;
+  border-radius: 8px;
+  margin-bottom: 14px;
+}
+
+/* ── Confirm / full-width button ─────────── */
+.full-btn {
+  width: 100%;
+  height: 48px;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.confirm-btn { margin-top: 4px; }
+
+/* ══════════════════════════════════════════
+   RECEIPT (confirmed view)
+   ══════════════════════════════════════════ */
+.confirmed-header {
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.confirmed-icon {
+  font-size: 64px;
+  width: 64px;
+  height: 64px;
+  color: #2e7d32;
+  display: block;
+  margin: 0 auto 12px;
+}
+
+.confirmed-header h1 {
+  font-size: 28px;
+  font-weight: 700;
+  color: #212121;
+  margin: 0 0 6px 0;
+}
+
+.confirmed-header p {
+  font-size: 14px;
+  color: #757575;
+  margin: 0;
+}
+
+/* ── Receipt card ────────────────────────── */
+.receipt-card {
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.receipt-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 24px;
+  background: #1565c0;
+  color: #fff;
+}
+
+.receipt-logo {
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.receipt-id {
+  font-size: 11px;
+  opacity: 0.65;
+  font-family: 'Courier New', monospace;
+}
+
+/* ── Receipt sections ────────────────────── */
+.receipt-section {
+  padding: 0 24px;
+}
+
+.section-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: #9e9e9e;
+  padding: 14px 0 8px;
+}
+
+.discounts-label {
+  color: #2e7d32;
+}
+
+.section-icon {
+  font-size: 14px;
+  width: 14px;
+  height: 14px;
+  color: #2e7d32;
+}
+
+/* ── Line items ──────────────────────────── */
+.line-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px dashed #f0f0f0;
+}
+
+.line-item:last-child { border-bottom: none; }
+
+.line-name {
+  font-size: 14px;
+  color: #212121;
+  font-weight: 500;
+}
+
+.line-amount {
+  font-size: 14px;
+  font-weight: 700;
+  color: #212121;
+  white-space: nowrap;
+  margin-left: 16px;
+}
+
+/* ── Discount lines ──────────────────────── */
+.discount-line {
+  background: #f9fbe7;
+  margin: 0 -24px;
+  padding: 8px 24px;
+  border-bottom: 1px dashed #e8f5e9 !important;
+}
+
+.discount-name {
+  font-size: 13px;
+  color: #2e7d32;
+  font-weight: 500;
+}
+
+.discount-amount {
+  font-size: 13px;
+  font-weight: 700;
+  color: #2e7d32;
+}
+
+/* ── Totals block ────────────────────────── */
+.receipt-totals {
+  padding: 0 24px 20px;
+}
+
+.total-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  font-size: 14px;
+  color: #424242;
+}
+
+.subtotal-row {
+  color: #757575;
+  font-size: 13px;
+}
+
+.total-discount-row {
+  color: #2e7d32;
+}
+
+.total-discount-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 600;
+}
+
+.savings-icon {
+  font-size: 16px;
+  width: 16px;
+  height: 16px;
+}
+
+.total-discount-value {
+  font-weight: 700;
+  font-size: 15px;
+  color: #2e7d32;
+}
+
+.grand-total-row {
+  font-size: 20px;
+  font-weight: 800;
+  color: #212121;
+  padding-top: 12px;
+}
+
+.grand-total-value {
+  font-size: 26px;
+  font-weight: 800;
+  color: #1565c0;
+}
+
+/* ── Savings banner ──────────────────────── */
+.savings-banner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: linear-gradient(135deg, #e8f5e9, #f1f8e9);
+  border-top: 1px solid #a5d6a7;
+  padding: 14px 24px;
+  font-size: 14px;
+  color: #2e7d32;
+  font-weight: 500;
+}
+
+.savings-banner mat-icon { color: #2e7d32; }
+.savings-banner strong  { font-weight: 800; font-size: 16px; }
+
+/* ══════════════════════════════════════════
+   DISCOUNT BREAKDOWN (review page, inline)
+   ══════════════════════════════════════════ */
+.discount-breakdown {
+  margin-top: 4px;
+}
+
+.discount-breakdown-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 14px 0 8px;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #2e7d32;
+}
+
+.db-icon {
+  font-size: 16px;
+  width: 16px;
+  height: 16px;
+  color: #2e7d32;
+}
+
+.discount-breakdown-body {
+  background: #f9fbe7;
+  border: 1px solid #c8e6c9;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+/* Each offer row */
+.db-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  border-bottom: 1px solid #e8f5e9;
+}
+
+.db-row:last-child {
+  border-bottom: none;
+}
+
+.db-item-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.db-product {
+  font-size: 13px;
+  font-weight: 600;
+  color: #212121;
+}
+
+.db-offer-desc {
+  font-size: 12px;
+  color: #2e7d32;
+}
+
+.db-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #2e7d32;
+  background: #e8f5e9;
+  border: 1px solid #a5d6a7;
+  border-radius: 12px;
+  padding: 3px 10px;
+  white-space: nowrap;
+}
+
+.db-badge-icon {
+  font-size: 13px;
+  width: 13px;
+  height: 13px;
+}
+
+/* No offers message */
+.db-no-offers {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 12px 14px;
+  font-size: 13px;
+  color: #757575;
+}
+
+.discount-note {
+  font-size: 11px;
+  color: #9e9e9e;
+  font-style: italic;
+  padding-bottom: 4px;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 12px;
+  margin-top: 4px;
+}
+
+.action-btn {
+  flex: 1;
+  height: 48px;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+@media (max-width: 480px) {
+  .action-buttons {
+    flex-direction: column;
+  }
+}
