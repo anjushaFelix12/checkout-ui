@@ -67,4 +67,4 @@ ng build --configuration production
 
 Project documentation is available in the `docs/` directory:
 
-- [Architecture](docs/architecture.md) — Backend architecture and module structure
+- [Architecture](docs/architecture.md) — Frontend architecture and module structure
