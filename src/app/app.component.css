@@ -1,0 +1,112 @@
+.app-toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.toolbar-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.app-logo {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+}
+
+.app-title {
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  color: #fff;
+  margin-right: 24px;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.nav-link {
+  color: rgba(255, 255, 255, 0.85) !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  border-radius: 8px !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  padding: 0 14px !important;
+  height: 40px !important;
+  transition: background 0.15s ease !important;
+}
+
+.nav-link:hover {
+  background: rgba(255, 255, 255, 0.12) !important;
+  color: #fff !important;
+}
+
+.nav-link-active {
+  background: rgba(255, 255, 255, 0.18) !important;
+  color: #fff !important;
+  font-weight: 700 !important;
+}
+
+.nav-link mat-icon {
+  font-size: 18px !important;
+  width: 18px !important;
+  height: 18px !important;
+}
+
+.offers-pill {
+  background: #ffcc02;
+  color: #1a237e;
+  font-size: 10px;
+  font-weight: 800;
+  border-radius: 10px;
+  padding: 1px 6px;
+  margin-left: 4px;
+  line-height: 16px;
+}
+
+.mobile-menu-btn {
+  display: none !important;
+}
+
+@media (max-width: 640px) {
+  .nav-links {
+    display: none;
+  }
+
+  .mobile-menu-btn {
+    display: flex !important;
+  }
+}
+
+.spacer {
+  flex: 1;
+}
+
+.cart-btn {
+  position: relative;
+}
+
+/* ── Layout ──────────────────────────────── */
+.app-container {
+  height: calc(100vh - 64px);
+}
+
+.app-content {
+  overflow-y: auto;
+  background: #fafafa;
+  min-height: 100%;
+}
+
+.cart-drawer {
+  box-shadow: -4px 0 20px rgba(0, 0, 0, 0.1);
+}

@@ -1,0 +1,90 @@
+<div class="offers-page">
+  <div class="page-container">
+
+    <!-- Page header -->
+    <div class="page-header">
+      <div class="header-text">
+        <h1>
+          <mat-icon class="title-icon">local_offer</mat-icon>
+          Weekly Offers
+        </h1>
+        <p class="header-sub">Fresh deals every week — automatically applied at checkout.</p>
+      </div>
+      <button mat-raised-button color="primary" class="shop-btn" (click)="onShopNow()">
+        <mat-icon>shopping_basket</mat-icon>
+        Shop Now
+      </button>
+    </div>
+
+    <!-- Loading -->
+    <div class="loading-state" *ngIf="loading">
+      <mat-spinner diameter="48"></mat-spinner>
+      <p>Loading offers...</p>
+    </div>
+
+    <!-- Error -->
+    <div class="error-state" *ngIf="error && !loading">
+      <mat-icon class="error-icon">error_outline</mat-icon>
+      <p>Could not load offers</p>
+      <span>Make sure the backend is running on port 8080</span>
+    </div>
+
+    <!-- Empty -->
+    <div class="empty-state" *ngIf="!loading && !error && offers.length === 0">
+      <mat-icon class="empty-icon">sentiment_dissatisfied</mat-icon>
+      <p>No active offers this week</p>
+      <span>Check back soon — new deals arrive every Monday</span>
+    </div>
+
+
+    <div class="offer-count" *ngIf="!loading && !error && offers.length > 0">
+      <span class="count-badge">{{ offers.length }} active deal{{ offers.length !== 1 ? 's' : '' }} this week</span>
+    </div>
+
+    <div class="offers-grid" *ngIf="!loading && !error && offers.length > 0">
+      <div
+        class="offer-card"
+        *ngFor="let offer of offers"
+        [class.expiring-soon]="isExpiringSoon(offer.validUntil)"
+        [class.expired]="isExpired(offer.validUntil)">
+
+
+        <div class="ribbon expiring" *ngIf="isExpiringSoon(offer.validUntil)">
+          Ends soon!
+        </div>
+
+
+        <div class="ribbon expired-ribbon" *ngIf="isExpired(offer.validUntil)">
+          Expired
+        </div>
+
+        <div class="offer-card-top">
+          <img class="product-icon" [src]="getImage(offer.productCode)" alt="{{ offer.productCode }}" />
+          <span class="offer-product-code">{{ offer.productCode }}</span>
+        </div>
+
+        <div class="deal-highlight">
+          <span class="deal-qty">{{ offer.quantity }}</span>
+          <span class="deal-for">for</span>
+          <span class="deal-price">€{{ offer.bundlePrice.toFixed(2) }}</span>
+        </div>
+
+        <p class="offer-description">{{ offer.description }}</p>
+
+        <mat-divider></mat-divider>
+
+        <div class="offer-footer">
+          <div class="validity">
+            <mat-icon class="validity-icon">calendar_today</mat-icon>
+            <span>Valid until {{ formatDate(offer.validUntil) }}</span>
+          </div>
+          <div class="auto-applied">
+            <mat-icon class="auto-icon">check_circle</mat-icon>
+            <span>Auto-applied</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

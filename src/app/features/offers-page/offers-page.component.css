@@ -1,0 +1,266 @@
+.offers-page {
+  min-height: calc(100vh - 64px);
+  background: #f5f5f5;
+  padding: 32px 16px;
+}
+
+.page-container {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+
+.page-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 32px;
+  flex-wrap: wrap;
+}
+
+.header-text h1 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 30px;
+  font-weight: 800;
+  color: #212121;
+  margin: 0 0 6px 0;
+}
+
+.title-icon {
+  font-size: 32px;
+  width: 32px;
+  height: 32px;
+  color: #1565c0;
+}
+
+.header-sub {
+  font-size: 14px;
+  color: #757575;
+  margin: 0;
+  max-width: 520px;
+}
+
+.shop-btn {
+  border-radius: 10px;
+  font-weight: 700;
+  height: 44px;
+  padding: 0 20px;
+  white-space: nowrap;
+}
+
+
+.loading-state,
+.error-state,
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 24px;
+  gap: 16px;
+  color: #9e9e9e;
+  text-align: center;
+}
+
+.error-icon,
+.empty-icon {
+  font-size: 64px;
+  width: 64px;
+  height: 64px;
+  color: #e0e0e0;
+}
+
+.error-icon { color: #ef9a9a; }
+
+.error-state p,
+.empty-state p {
+  font-size: 16px;
+  font-weight: 600;
+  color: #757575;
+  margin: 0;
+}
+
+
+.offer-count {
+  margin-bottom: 20px;
+}
+
+.count-badge {
+  display: inline-flex;
+  align-items: center;
+  background: #e3f2fd;
+  color: #1565c0;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 6px 14px;
+  border-radius: 20px;
+  border: 1px solid #90caf9;
+}
+
+
+.offers-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 24px;
+  margin-bottom: 48px;
+}
+
+
+.offer-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.07);
+  border: 2px solid transparent;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.offer-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+  border-color: #90caf9;
+}
+
+.offer-card.expiring-soon {
+  border-color: #ffb74d;
+}
+
+.offer-card.expired {
+  opacity: 0.55;
+  filter: grayscale(0.4);
+}
+
+.ribbon {
+  position: absolute;
+  top: 14px;
+  right: -22px;
+  transform: rotate(35deg);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  padding: 4px 28px;
+  color: #fff;
+}
+
+.ribbon.expiring {
+  background: #f57c00;
+}
+
+.ribbon.expired-ribbon {
+  background: #9e9e9e;
+}
+
+
+.offer-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.offer-emoji {
+  font-size: 48px;
+  line-height: 1;
+}
+
+.offer-product-code {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #9e9e9e;
+  background: #f5f5f5;
+  padding: 4px 10px;
+  border-radius: 6px;
+}
+
+/* ── Deal highlight ──────────────────────── */
+.deal-highlight {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+.deal-qty {
+  font-size: 42px;
+  font-weight: 900;
+  color: #1565c0;
+  line-height: 1;
+}
+
+.deal-for {
+  font-size: 16px;
+  color: #9e9e9e;
+  font-weight: 500;
+}
+
+.deal-price {
+  font-size: 32px;
+  font-weight: 800;
+  color: #2e7d32;
+  line-height: 1;
+}
+
+/* ── Description ─────────────────────────── */
+.offer-description {
+  font-size: 13px;
+  color: #616161;
+  margin: 0 0 16px 0;
+  font-style: italic;
+}
+
+
+.offer-footer {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-top: 12px;
+}
+
+.validity,
+.auto-applied {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+}
+
+.validity {
+  color: #757575;
+}
+
+.validity-icon {
+  font-size: 14px;
+  width: 14px;
+  height: 14px;
+  color: #bdbdbd;
+}
+
+.auto-applied {
+  color: #2e7d32;
+  font-weight: 600;
+}
+
+.auto-icon {
+  font-size: 14px;
+  width: 14px;
+  height: 14px;
+  color: #2e7d32;
+}
+
+.product-icon {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+}
+
+@media (max-width: 600px) {
+  .offers-grid { grid-template-columns: 1fr; }
+}

@@ -1,0 +1,67 @@
+<mat-toolbar color="primary" class="app-toolbar">
+
+  <!-- Logo -->
+  <div class="toolbar-left" routerLink="/">
+    
+    <img class="app-logo" [src]="'assets/logo.png'" alt="logo" />
+    <span class="app-title">Supermarket</span>
+  </div>
+
+  <!-- Desktop nav links -->
+  <nav class="nav-links">
+    <a
+      mat-button
+      class="nav-link"
+      routerLink="/"
+      routerLinkActive="nav-link-active"
+      [routerLinkActiveOptions]="{ exact: true }">
+      <mat-icon>storefront</mat-icon>
+      Products
+    </a>
+    <a
+      mat-button
+      class="nav-link"
+      routerLink="/offers"
+      routerLinkActive="nav-link-active">
+      <mat-icon>local_offer</mat-icon>
+      Weekly Offers
+      <span class="offers-pill" *ngIf="offerCount > 0">{{ offerCount }}</span>
+    </a>
+  </nav>
+
+  <span class="spacer"></span>
+
+  <!-- Mobile menu (hamburger) -->
+  <button mat-icon-button class="mobile-menu-btn" [matMenuTriggerFor]="mobileMenu">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <mat-menu #mobileMenu="matMenu">
+    <a mat-menu-item routerLink="/">
+      <mat-icon>storefront</mat-icon>
+      Products
+    </a>
+    <a mat-menu-item routerLink="/offers">
+      <mat-icon>local_offer</mat-icon>
+      Weekly Offers
+    </a>
+  </mat-menu>
+
+  <!-- Cart icon -->
+  <button mat-icon-button class="cart-btn" (click)="openCart()" matTooltip="View Cart">
+    <mat-icon
+      [matBadge]="(itemCount$ | async) || null"
+      matBadgeColor="accent"
+      matBadgeSize="small">
+      shopping_cart
+    </mat-icon>
+  </button>
+
+</mat-toolbar>
+
+<mat-drawer-container class="app-container" autosize>
+
+  <mat-drawer-content class="app-content">
+    <router-outlet></router-outlet>
+  </mat-drawer-content>
+
+</mat-drawer-container>

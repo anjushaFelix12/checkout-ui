@@ -1,0 +1,29 @@
+<div class="product-list-container">
+
+  <div class="page-header">
+    <h2>Products</h2>
+  </div>
+
+  <!-- Loading -->
+  <div class="loading-state" *ngIf="loading">
+    <mat-spinner diameter="48"></mat-spinner>
+    <p>Loading products...</p>
+  </div>
+
+  <!-- Error -->
+  <div class="error-state" *ngIf="error && !loading">
+    <mat-icon class="error-icon">error_outline</mat-icon>
+    <p>Could not load products</p>
+    <span>Make sure the backend is running on port 8080</span>
+  </div>
+
+  <!-- Product Grid -->
+  <div class="product-grid" *ngIf="!loading && !error">
+    <app-product-card
+      *ngFor="let product of products"
+      [product]="product"
+      (addToCart)="onAddToCart($event)">
+    </app-product-card>
+  </div>
+
+</div>
